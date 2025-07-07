@@ -1,36 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
 
-type Employee struct {
-	name     string
-	age      int
-	isRomote bool
-	address  *Address
-}
-
-type Address struct {
-	street string
-	city   string
-}
-
-func (e *Employee) updateName(newName string) {
-	e.name = newName
-}
+	"github.com/Jayant-issar/go-distributed-file-storage/p2p"
+)
 
 func main() {
-	jayantAddress := Address{
-		street: "moti bagh",
-		city:   "New Delhi",
+	tr := p2p.NewTcpTransport(":3000")
+	if err := tr.ListenAndAccept(); err != nil {
+		log.Fatal(err)
 	}
-	jayant := Employee{
-		name:     "jayant",
-		age:      21,
-		isRomote: false,
-		address:  &jayantAddress,
-	}
-
-	jayant.address.street = "satya niketan"
-	fmt.Println(jayant.address.street)
-	fmt.Println(jayantAddress.street)
+	select {}
+	fmt.Println("done hai ji")
 }
